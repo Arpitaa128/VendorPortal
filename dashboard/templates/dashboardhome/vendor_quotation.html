@@ -1,0 +1,56 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+My Quotations
+{% endblock %}
+
+{% block content %}
+
+<h2>My Quotations</h2>
+
+<table
+border="1"
+cellpadding="10"
+cellspacing="0"
+width="100%"
+style="border-collapse:collapse;">
+
+<tr>
+
+<th>ID</th>
+<th>Quotation Number</th>
+<th>Date</th>
+<th>Amount</th>
+<th>Status</th>
+
+</tr>
+
+{% for quotation in quotations %}
+
+<tr>
+
+<td>{{ quotation.id }}</td>
+<td>{{ quotation.quotation_number }}</td>
+<td>{{ quotation.quotation_date }}</td>
+<td>{{ quotation.amount }}</td>
+<td>{{ quotation.status }}</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5" align="center">
+
+No Quotations Found
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

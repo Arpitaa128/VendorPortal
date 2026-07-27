@@ -1,0 +1,285 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Vendor Management
+{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+<table width="100%" cellpadding="0" cellspacing="0"
+style="margin-bottom:20px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:28px;font-weight:bold;color:#1b2b65;">
+Vendor Management
+</div>
+
+<div style="font-size:14px;color:#777;margin-top:5px;">
+Manage all registered vendors
+</div>
+
+</td>
+
+<td align="right">
+
+<a href="{% url 'add_vendor' %}"
+style="
+background:#0056D2;
+color:white;
+text-decoration:none;
+padding:10px 20px;
+border-radius:5px;
+font-weight:bold;">
+
++ Register New Vendor
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- Statistics Cards -->
+<table width="100%" cellpadding="10" cellspacing="0"
+style="margin-bottom:20px;">
+
+<tr>
+
+<td width="33%">
+
+<table width="100%" cellpadding="15"
+style="
+background:#ffffff;
+border:1px solid #E5E5E5;
+border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Total Vendors
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#1B2B65;
+margin-top:10px;">
+
+{{ vendors|length }}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<td width="33%">
+
+<table width="100%" cellpadding="15"
+style="
+background:#ffffff;
+border:1px solid #E5E5E5;
+border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Active Vendors
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#28A745;">
+
+{{ vendors|length }}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<td width="33%">
+
+<table width="100%" cellpadding="15"
+style="
+background:#ffffff;
+border:1px solid #E5E5E5;
+border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Registered Companies
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#0056D2;">
+
+{{ vendors|length }}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- Vendor Table -->
+
+<!-- Vendor Table -->
+
+<table width="100%"
+cellpadding="0"
+cellspacing="0"
+style="
+background:#FFFFFF;
+border:1px solid #E5E5E5;
+border-radius:8px;
+overflow:hidden;">
+
+<tr style="background:#1B2B65;color:white;height:55px;">
+
+<th align="left" style="padding-left:20px;">Vendor ID</th>
+<th align="left">Vendor Name</th>
+<th align="left">Contact Person</th>
+<th align="left">Email</th>
+<th align="left">Mobile No</th>
+<th align="left">City</th>
+<th align="center">Status</th>
+<th align="center">Action</th>
+
+</tr>
+
+{% for vendor in vendors %}
+
+<tr style="height:60px;border-bottom:1px solid #EEEEEE;">
+
+<td style="padding-left:20px;">
+V{{ vendor.id }}
+</td>
+
+<td>
+{{ vendor.company_name }}
+</td>
+
+<td>
+{{ vendor.contact_person }}
+</td>
+
+<td>
+{{ vendor.email }}
+</td>
+
+<td>
+{{ vendor.phone }}
+</td>
+
+<td>
+{{ vendor.city }}
+</td>
+
+<td align="center">
+
+<span style="
+background:#D4F8E8;
+color:#28A745;
+padding:6px 14px;
+border-radius:20px;
+font-size:13px;
+font-weight:bold;">
+
+Active
+
+</span>
+
+</td>
+
+<td align="center">
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+">
+
+    <!-- Edit -->
+
+    <a href="{% url 'edit_vendor' vendor.id %}"
+       title="Edit"
+       style="
+       width:36px;
+       height:36px;
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       background:#FFC107;
+       color:black;
+       border-radius:6px;
+       text-decoration:none;">
+
+        <i class="fa-solid fa-pen"></i>
+
+    </a>
+
+    <!-- Delete -->
+
+    <a href="{% url 'delete_vendor' vendor.id %}"
+       title="Delete"
+       onclick="return confirm('Delete this vendor?')"
+       style="
+       width:36px;
+       height:36px;
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       background:#DC3545;
+       color:white;
+       border-radius:6px;
+       text-decoration:none;">
+
+        <i class="fa-solid fa-trash"></i>
+
+    </a>
+
+</div>
+
+</td>
+
+</tr>
+
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,160 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Vendor Form
+{% endblock %}
+
+{% block content %}
+
+<form method="POST">
+    {% csrf_token %}
+
+    <table
+        width="100%"
+        cellpadding="20"
+        cellspacing="0"
+        style="
+        background:#FFFFFF;
+        border:1px solid #E5E5E5;
+        border-radius:10px;">
+
+<!-- Page Header -->
+
+<table width="100%" cellpadding="0" cellspacing="0"
+style="margin-bottom:25px;">
+
+<tr>
+
+<td width="50%">
+
+<label>Company Name</label>
+<br><br>
+{{ form.company_name }}
+
+</td>
+
+<td width="50%">
+
+<label>Contact Person</label>
+<br><br>
+{{ form.contact_person }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<label>Email</label>
+<br><br>
+{{ form.email }}
+
+</td>
+
+<td>
+
+<label>Mobile Number</label>
+<br><br>
+{{ form.phone }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<label>GST Number</label>
+<br><br>
+{{ form.gst_number }}
+
+</td>
+
+<td>
+
+<label>City</label>
+<br><br>
+{{ form.city }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<label>Status</label>
+<br><br>
+{{ form.status }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<label>Address</label>
+<br><br>
+{{ form.address }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2"
+align="right"
+style="padding-top:30px;">
+
+<a href="{% url 'vendor_list' %}"
+style="
+display:inline-block;
+background:#6C757D;
+color:white;
+text-decoration:none;
+padding:12px 28px;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+margin-right:10px;">
+
+Cancel
+
+</a>
+
+<button
+type="submit"
+style="
+background:#0056D2;
+color:white;
+padding:12px 30px;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;">
+
+{% if form.instance.pk %}
+Update Vendor
+{% else %}
+Save Vendor
+{% endif %}
+
+</button>
+
+</td>
+
+</tr>
+</table>
+
+</form>
+
+
+{% endblock %}

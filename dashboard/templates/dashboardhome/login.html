@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Login</title>
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+
+input,
+select{
+
+transition:.3s;
+
+}
+
+input:focus,
+select:focus{
+
+border:1px solid #A71D2A;
+
+box-shadow:0 0 8px rgba(167,29,42,.25);
+
+}
+
+button{
+
+transition:.3s;
+
+}
+
+button:hover{
+
+background:#861522;
+
+}
+
+</style>
+</head>
+
+
+<body style="
+margin:0;
+padding:0;
+background:#F5F6FA;
+font-family:Arial,Helvetica,sans-serif;">
+
+<table
+width="100%"
+height="100%"
+cellpadding="0"
+cellspacing="0"
+style="height:100vh;">
+
+<tr>
+
+<td align="center" valign="middle">
+
+<table
+width="450"
+cellpadding="0"
+cellspacing="0"
+style="
+background:#FFFFFF;
+border-radius:12px;
+box-shadow:0 8px 25px rgba(0,0,0,.15);">
+
+<tr>
+
+<td style="padding:35px;">
+<table
+width="100%"
+cellpadding="0"
+cellspacing="0"
+style="
+background:#A71D2A;
+border-radius:12px 12px 0 0;">
+
+<tr>
+
+<td
+align="center"
+style="
+padding:20px;">
+
+
+
+
+
+
+
+
+</tr>
+
+</table>
+<!-- Heading -->
+
+<div
+style="
+font-size:30px;
+font-weight:bold;
+text-align:center;">
+
+<span style="color:#000;">
+Login To
+</span>
+
+<span style="color:#C62828;">
+Supplier Module
+</span>
+
+</div>
+
+<div
+style="
+text-align:center;
+color:#666;
+margin-top:10px;
+font-size:14px;">
+
+Please enter your login credentials.
+
+</div>
+
+<br><br>
+
+{% if error %}
+
+<div style="
+background:#FDECEC;
+color:#C62828;
+padding:12px;
+border-radius:6px;
+margin-bottom:20px;">
+
+{{ error }}
+
+</div>
+
+{% endif %}
+
+<form method="POST">
+
+{% csrf_token %}
+
+
+<br><br>
+
+
+<!-- Username -->
+
+<label
+style="
+font-size:14px;
+font-weight:bold;
+color:#333;">
+Username
+</label>
+
+<br><br>
+
+<div
+style="
+border:1px solid #CCCCCC;
+border-radius:6px;
+height:45px;">
+
+<table
+width="100%"
+height="45"
+cellpadding="0"
+cellspacing="0">
+
+<tr>
+
+<td width="45" align="center">
+
+<i class="fa-solid fa-user"
+style="color:#888;"></i>
+
+</td>
+
+<td>
+
+{{ form.username }}
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<br>
+
+
+<!-- Password -->
+
+<label
+style="
+font-size:14px;
+font-weight:bold;
+color:#333;">
+Password
+</label>
+
+<br><br>
+
+<div
+style="
+border:1px solid #CCCCCC;
+border-radius:6px;
+height:45px;">
+
+<table
+width="100%"
+height="45"
+cellpadding="0"
+cellspacing="0">
+
+<tr>
+
+<td width="45" align="center">
+
+<i class="fa-solid fa-lock"
+style="color:#888;"></i>
+
+</td>
+
+<td>
+
+{{ form.password }}
+
+</td>
+
+<td
+width="45"
+align="center">
+
+<i
+class="fa-solid fa-eye"
+style="
+cursor:pointer;
+color:#666;"
+onclick="togglePassword()"></i>
+
+</td>
+
+</tr>
+
+</table>
+
+</div>
+
+<br>
+
+<table width="100%">
+
+<tr>
+
+<td align="left">
+
+<a
+href="#"
+style="
+text-decoration:none;
+font-size:13px;
+color:#0D6EFD;">
+
+Forgot Username?
+
+</a>
+
+</td>
+
+<td align="right">
+
+<a
+href="#"
+style="
+text-decoration:none;
+font-size:13px;
+color:#0D6EFD;">
+
+Forgot Password?
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<!-- CAPTCHA -->
+
+<!-- <label style="font-weight:bold;">
+Captcha
+</label>
+
+<br><br>
+
+{{ form.captcha }}
+
+<br><br>
+
+<table width="100%">
+
+<tr>
+
+<td
+width="150"
+style="
+background:#F4F4F4;
+border:1px solid #CCCCCC;
+border-radius:6px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+letter-spacing:4px;
+color:#C62828;
+height:45px;">
+
+A7X9P
+
+</td>
+
+<td align="right">
+
+<a href="#"
+style="
+text-decoration:none;
+color:#0D6EFD;
+font-size:14px;">
+
+Refresh
+
+</a>
+
+</td>
+
+</tr>
+
+</table> -->
+
+<!-- <br>
+
+<input
+type="text"
+name="captcha"
+placeholder="Enter Captcha"
+style="
+width:100%;
+height:45px;
+border:1px solid #CCCCCC;
+border-radius:6px;
+padding-left:12px;
+font-size:14px;
+outline:none;
+box-sizing:border-box;"> -->
+
+<br><br>
+
+<button
+type="submit"
+style="
+width:100%;
+height:48px;
+background:#C62828;
+color:white;
+border:none;
+border-radius:25px;
+font-size:17px;
+font-weight:bold;
+cursor:pointer;">
+
+Login
+
+</button>
+
+<br><br>
+
+<div
+style="
+text-align:center;
+font-size:14px;">
+
+New User?
+
+<a href="{% url 'register' %}"
+style="
+color:#C62828;
+font-weight:bold;
+text-decoration:none;">
+
+Register Here
+
+</a>
+
+</div>
+
+</form>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+<script>
+
+function togglePassword(){
+
+var password=document.getElementById("password");
+
+if(password.type==="password"){
+
+password.type="text";
+
+}
+else{
+
+password.type="password";
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,327 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Quotation Management
+{% endblock %}
+
+{% block content %}
+
+<!-- PAGE HEADER -->
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:28px;font-weight:bold;color:#17336E;">
+Quotation Management
+</div>
+
+<div style="font-size:14px;color:#777;">
+Manage all vendor quotations
+</div>
+
+</td>
+
+<td align="right">
+
+<a href="{% url 'add_quotation' %}"
+style="
+background:#0056D2;
+color:white;
+padding:10px 22px;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;">
+
++ Register New Quotation
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- SEARCH -->
+
+<table width="100%" cellpadding="10"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:8px;
+margin-bottom:20px;">
+
+<tr>
+
+<td width="85%">
+
+<input
+type="text"
+placeholder="Search quotation..."
+style="
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:5px;">
+
+</td>
+
+<td align="right">
+
+<input
+type="submit"
+value="Search"
+style="
+background:#0056D2;
+color:white;
+padding:10px 25px;
+border:none;
+border-radius:5px;">
+
+</td>
+
+</tr>
+
+</table>
+
+
+<!-- TABLE -->
+
+<table
+width="100%"
+cellpadding="12"
+cellspacing="0"
+style="
+background:white;
+border-collapse:collapse;
+border:1px solid #ddd;">
+
+<tr style="
+background:#17336E;
+color:white;">
+
+<tr style="background:#17336E;color:white;">
+
+    <th>Quotation No.</th>
+
+    <th>Vendor</th>
+
+    <th>Requirement</th>
+
+    <th>Quotation Date</th>
+
+    <th>Valid Till</th>
+
+    <th>Amount</th>
+
+    <th>Status</th>
+
+    <th align="center">Action</th>
+
+</tr>
+</tr>
+
+{% for quotation in quotations %}
+
+<tr style="border-bottom:1px solid #E5E5E5;">
+
+    <td>{{ quotation.quotation_number }}</td>
+
+    <td>{{ quotation.vendor.company_name }}</td>
+
+    <td>{{ quotation.requirement }}</td>
+
+    <td>{{ quotation.quotation_date }}</td>
+
+    <td>{{ quotation.valid_till }}</td>
+
+    <td>₹ {{ quotation.amount }}</td>
+
+    <td>
+
+        {% if quotation.status == "Approved" %}
+
+        <span style="
+        background:#D4EDDA;
+        color:#155724;
+        padding:6px 14px;
+        border-radius:20px;
+        font-size:13px;
+        font-weight:bold;">
+
+            {{ quotation.status }}
+
+        </span>
+
+        {% elif quotation.status == "Rejected" %}
+
+        <span style="
+        background:#F8D7DA;
+        color:#721C24;
+        padding:6px 14px;
+        border-radius:20px;
+        font-size:13px;
+        font-weight:bold;">
+
+            {{ quotation.status }}
+
+        </span>
+
+        {% else %}
+
+        <span style="
+        background:#FFF3CD;
+        color:#856404;
+        padding:6px 14px;
+        border-radius:20px;
+        font-size:13px;
+        font-weight:bold;">
+
+            {{ quotation.status }}
+
+        </span>
+
+        {% endif %}
+
+    </td>
+
+  <td align="center">
+
+<!-- Edit -->
+
+<td align="center">
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+white-space:nowrap;
+">
+
+{% if quotation.status == "Pending" %}
+
+<!-- Edit -->
+<a href="{% url 'edit_quotation' quotation.id %}"
+title="Edit"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#FFC107;
+color:black;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<!-- Approve -->
+<a href="{% url 'approve_quotation' quotation.id %}"
+title="Approve"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#198754;
+color:white;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-check"></i>
+
+</a>
+
+<!-- Reject -->
+<a href="{% url 'reject_quotation' quotation.id %}"
+title="Reject"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#DC3545;
+color:white;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-xmark"></i>
+
+</a>
+
+{% elif quotation.status == "Approved" %}
+
+<!-- Edit -->
+<a href="{% url 'edit_quotation' quotation.id %}"
+title="Edit"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#FFC107;
+color:black;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-pen"></i>
+
+</a>
+
+<!-- Generate PO -->
+<a href="{% url 'generate_purchase_order' quotation.id %}"
+title="Generate Purchase Order"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#0D6EFD;
+color:white;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-file-circle-plus"></i>
+
+</a>
+
+{% endif %}
+
+<!-- Delete -->
+<a href="{% url 'delete_quotation' quotation.id %}"
+onclick="return confirm('Delete this quotation?')"
+title="Delete"
+style="
+width:36px;
+height:36px;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#6C757D;
+color:white;
+border-radius:6px;
+text-decoration:none;">
+
+<i class="fa-solid fa-trash"></i>
+
+</a>
+
+</div>
+
+</td>
+</tr>
+
+{% endfor %}
+{% endblock %}

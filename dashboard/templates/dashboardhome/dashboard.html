@@ -1,0 +1,1068 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+
+<!-- Dashboard Header -->
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:30px;">
+
+<tr>
+
+<td>
+
+<div style="
+font-size:38px;
+font-weight:bold;
+color:#17336E;">
+
+Dashboard
+
+</div>
+
+<div style="
+font-size:16px;
+color:#666;
+margin-top:8px;">
+
+Overview of your Vendor Management System
+
+</div>
+
+</td>
+
+<td align="right">
+
+<input
+type="date"
+style="
+padding:10px 14px;
+border:1px solid #DDD;
+border-radius:6px;">
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- Dashboard Cards -->
+
+<table
+width="100%"
+cellpadding="10"
+cellspacing="0">
+
+<tr>
+
+<!-- Vendors -->
+
+<td width="25%">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td width="70">
+
+<div style="
+width:60px;
+height:60px;
+background:#EEF4FF;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:#0D6EFD;">
+
+<i class="fa-solid fa-users"></i>
+
+</div>
+
+</td>
+
+<td>
+
+<div style="color:#666;">
+
+Total Vendors
+
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#17336E;">
+
+{{ total_vendors }}
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<hr>
+
+<table width="100%">
+
+<tr>
+
+<td>
+
+Active
+
+</td>
+
+<td
+align="right"
+style="
+color:#198754;
+font-weight:bold;">
+
+{{ active_vendors }}
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<!-- Quotations -->
+
+<td width="25%">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td width="70">
+
+<div style="
+width:60px;
+height:60px;
+background:#EDF9F0;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:#28A745;">
+
+<i class="fa-solid fa-file-lines"></i>
+
+</div>
+
+</td>
+
+<td>
+
+<div style="color:#666;">
+
+Total Quotations
+
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#17336E;">
+
+{{ total_quotations }}
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<hr>
+
+<table width="100%">
+
+<tr>
+
+<td>
+
+Approved
+
+</td>
+
+<td
+align="right"
+style="
+color:#198754;
+font-weight:bold;">
+
+{{ approved_quotations }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Pending
+
+</td>
+
+<td
+align="right"
+style="
+color:#F39C12;
+font-weight:bold;">
+
+{{ pending_quotations }}
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<!-- Invoices -->
+
+<td width="25%">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td width="70">
+
+<div style="
+width:60px;
+height:60px;
+background:#F5F2FF;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:#6F42C1;">
+
+<i class="fa-solid fa-file-invoice-dollar"></i>
+
+</div>
+
+</td>
+
+<td>
+
+<div style="color:#666;">
+
+Total Invoices
+
+</div>
+
+<div style="
+font-size:34px;
+font-weight:bold;
+color:#17336E;">
+
+{{ total_invoices }}
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td colspan="2">
+
+<hr>
+
+<table width="100%">
+
+<tr>
+
+<td>
+
+Paid
+
+</td>
+
+<td
+align="right"
+style="
+color:#198754;
+font-weight:bold;">
+
+{{ paid_invoices }}
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+Pending
+
+</td>
+
+<td
+align="right"
+style="
+color:#F39C12;
+font-weight:bold;">
+
+{{ pending_invoices }}
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<!-- Amount -->
+
+<td width="25%">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td width="70">
+
+<div style="
+width:60px;
+height:60px;
+background:#FFF7E7;
+border-radius:10px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+color:#F39C12;">
+
+<i class="fa-solid fa-indian-rupee-sign"></i>
+
+</div>
+
+</td>
+
+<td>
+
+<div style="color:#666;">
+
+Total Amount
+
+</div>
+
+<div style="
+font-size:28px;
+font-weight:bold;
+color:#17336E;">
+
+₹ {{ total_amount }}
+
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<!-- ================= Dashboard Status ================= -->
+
+<table
+width="100%"
+cellpadding="15"
+cellspacing="15">
+
+<tr>
+
+<!-- Quotation Status -->
+
+<td width="50%" valign="top">
+
+<table
+width="100%"
+cellpadding="20"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td colspan="2">
+
+<div
+style="
+font-size:22px;
+font-weight:bold;
+color:#17336E;">
+
+Quotation Status
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="35%" align="center">
+
+<div
+style="
+width:140px;
+height:140px;
+border:15px solid #28A745;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;">
+
+<div align="center">
+
+<div
+style="
+font-size:32px;
+font-weight:bold;
+color:#17336E;">
+
+{{ total_quotations }}
+
+</div>
+
+<div style="color:#777;">
+
+Total
+
+</div>
+
+</div>
+
+</div>
+
+</td>
+
+<td>
+
+<table width="100%" cellpadding="8">
+
+<tr>
+
+<td>
+
+<span style="color:#28A745;">●</span>
+
+Approved
+
+</td>
+
+<td align="right">
+
+<b>{{ approved_quotations }}</b>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<span style="color:#F39C12;">●</span>
+
+Pending
+
+</td>
+
+<td align="right">
+
+<b>{{ pending_quotations }}</b>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<span style="color:#DC3545;">●</span>
+
+Rejected
+
+</td>
+
+<td align="right">
+
+<b>{{ rejected_quotations }}</b>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<!-- Invoice Status -->
+
+<td width="50%" valign="top">
+
+<table
+width="100%"
+cellpadding="20"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td colspan="2">
+
+<div
+style="
+font-size:22px;
+font-weight:bold;
+color:#17336E;">
+
+Invoice Status
+
+</div>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td width="35%" align="center">
+
+<div
+style="
+width:140px;
+height:140px;
+border:15px solid #0D6EFD;
+border-radius:50%;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:auto;">
+
+<div align="center">
+
+<div
+style="
+font-size:32px;
+font-weight:bold;
+color:#17336E;">
+
+{{ total_invoices }}
+
+</div>
+
+<div style="color:#777;">
+
+Total
+
+</div>
+
+</div>
+
+</div>
+
+</td>
+
+<td>
+
+<table width="100%" cellpadding="8">
+
+<tr>
+
+<td>
+
+<span style="color:#198754;">●</span>
+
+Paid
+
+</td>
+
+<td align="right">
+
+<b>{{ paid_invoices }}</b>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<span style="color:#F39C12;">●</span>
+
+Pending
+
+</td>
+
+<td align="right">
+
+<b>{{ pending_invoices }}</b>
+
+</td>
+
+</tr>
+
+<tr>
+
+<td>
+
+<span style="color:#6F42C1;">●</span>
+
+Approved
+
+</td>
+
+<td align="right">
+
+<b>{{ approved_invoices }}</b>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+<br>
+<!-- ================= Recent Data ================= -->
+
+<table width="100%" cellpadding="15" cellspacing="15">
+
+<tr>
+
+<!-- Recent Quotations -->
+
+<td width="50%" valign="top">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td>
+
+<div style="
+font-size:22px;
+font-weight:bold;
+color:#17336E;">
+
+Recent Quotations
+
+</div>
+
+</td>
+
+<td align="right">
+
+<a href="{% url 'quotation_list' %}"
+style="
+text-decoration:none;
+color:#0D6EFD;
+font-weight:bold;">
+
+View All
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+<table
+width="100%"
+cellpadding="10"
+cellspacing="0"
+style="
+background:white;
+border-left:1px solid #E5E5E5;
+border-right:1px solid #E5E5E5;
+border-bottom:1px solid #E5E5E5;
+border-collapse:collapse;">
+
+<tr style="background:#F8F9FA;">
+
+<th align="left">Quotation</th>
+<th align="left">Vendor</th>
+<th align="right">Amount</th>
+<th align="center">Status</th>
+
+</tr>
+
+{% for quotation in recent_quotations %}
+
+<tr style="border-bottom:1px solid #EEEEEE;">
+
+<td>{{ quotation.quotation_number }}</td>
+
+<td>{{ quotation.vendor.company_name }}</td>
+
+<td align="right">
+
+₹ {{ quotation.amount }}
+
+</td>
+
+<td align="center">
+
+{% if quotation.status == "Approved" %}
+
+<span style="
+background:#D4EDDA;
+color:#155724;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Approved
+
+</span>
+
+{% elif quotation.status == "Pending" %}
+
+<span style="
+background:#FFF3CD;
+color:#856404;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Pending
+
+</span>
+
+{% else %}
+
+<span style="
+background:#F8D7DA;
+color:#721C24;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Rejected
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="4" align="center">
+
+No quotations found.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</td>
+
+<!-- Recent Invoices -->
+
+<td width="50%" valign="top">
+
+<table
+width="100%"
+cellpadding="18"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td>
+
+<div style="
+font-size:22px;
+font-weight:bold;
+color:#17336E;">
+
+Recent Invoices
+
+</div>
+
+</td>
+
+<td align="right">
+
+<a href="{% url 'invoice_list' %}"
+style="
+text-decoration:none;
+color:#0D6EFD;
+font-weight:bold;">
+
+View All
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+<table
+width="100%"
+cellpadding="10"
+cellspacing="0"
+style="
+background:white;
+border-left:1px solid #E5E5E5;
+border-right:1px solid #E5E5E5;
+border-bottom:1px solid #E5E5E5;
+border-collapse:collapse;">
+
+<tr style="background:#F8F9FA;">
+
+<th align="left">Invoice</th>
+<th align="left">Vendor</th>
+<th align="right">Amount</th>
+<th align="center">Status</th>
+
+</tr>
+
+{% for invoice in recent_invoices %}
+
+<tr style="border-bottom:1px solid #EEEEEE;">
+
+<td>{{ invoice.invoice_number }}</td>
+
+<td>{{ invoice.vendor.company_name }}</td>
+
+<td align="right">
+
+₹ {{ invoice.amount }}
+
+</td>
+
+<td align="center">
+
+{% if invoice.status == "Paid" %}
+
+<span style="
+background:#D4EDDA;
+color:#155724;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Paid
+
+</span>
+
+{% elif invoice.status == "Approved" %}
+
+<span style="
+background:#E8F1FF;
+color:#0D6EFD;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Approved
+
+</span>
+
+{% elif invoice.status == "Pending" %}
+
+<span style="
+background:#FFF3CD;
+color:#856404;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Pending
+
+</span>
+
+{% else %}
+
+<span style="
+background:#F8D7DA;
+color:#721C24;
+padding:5px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Rejected
+
+</span>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="4" align="center">
+
+No invoices found.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+<br>
+
+<!-- Footer -->
+
+<table
+width="100%"
+cellpadding="20"
+style="
+background:white;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td align="center"
+style="
+color:#666;
+font-size:14px;">
+
+© 2026 Enterprise Vendor Management System |
+Powered by Django
+
+</td>
+
+</tr>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,379 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Purchase Order Management
+{% endblock %}
+
+{% block content %}
+
+<!-- Header -->
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:28px;font-weight:bold;color:#17336E;">
+Purchase Order Management
+</div>
+
+<div style="font-size:14px;color:#777;">
+Manage purchase orders
+</div>
+
+</td>
+
+<td align="right">
+
+<a href="{% url 'add_purchase_order' %}"
+style="
+background:#0056D2;
+color:white;
+padding:10px 22px;
+text-decoration:none;
+border-radius:5px;
+font-weight:bold;">
+
++ Create Purchase Order
+
+</a>
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- Statistics -->
+
+<table width="100%" cellpadding="10" cellspacing="0" style="margin-bottom:20px;">
+
+<tr>
+
+<td width="25%">
+
+<table width="100%" cellpadding="18"
+style="background:white;border:1px solid #E5E5E5;border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Total Purchase Orders
+</div>
+
+<div style="font-size:34px;font-weight:bold;color:#17336E;">
+{{ purchase_orders|length }}
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<td width="25%">
+
+<table width="100%" cellpadding="18"
+style="background:white;border:1px solid #E5E5E5;border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Pending
+</div>
+
+<div style="font-size:34px;font-weight:bold;color:#F39C12;">
+0
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<td width="25%">
+
+<table width="100%" cellpadding="18"
+style="background:white;border:1px solid #E5E5E5;border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Approved
+</div>
+
+<div style="font-size:34px;font-weight:bold;color:#28A745;">
+0
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+<td width="25%">
+
+<table width="100%" cellpadding="18"
+style="background:white;border:1px solid #E5E5E5;border-radius:8px;">
+
+<tr>
+
+<td>
+
+<div style="font-size:14px;color:#777;">
+Rejected
+</div>
+
+<div style="font-size:34px;font-weight:bold;color:#DC3545;">
+0
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- Search -->
+
+<table width="100%"
+cellpadding="10"
+style="
+background:white;
+border:1px solid #E5E5E5;
+margin-bottom:20px;">
+
+<tr>
+
+<td width="85%">
+
+<input
+type="text"
+placeholder="Search Purchase Order..."
+style="
+width:100%;
+padding:10px;
+border:1px solid #ddd;
+border-radius:5px;">
+
+</td>
+
+<td align="right">
+
+<input
+type="submit"
+value="Search"
+style="
+background:#0056D2;
+color:white;
+padding:10px 25px;
+border:none;
+border-radius:5px;">
+
+</td>
+
+</tr>
+
+</table>
+
+<!-- Purchase Order Table -->
+
+<table
+width="100%"
+cellpadding="12"
+cellspacing="0"
+style="
+background:white;
+border-collapse:collapse;
+border:1px solid #ddd;">
+
+<tr style="background:#17336E;color:white;">
+
+<th>PO Number</th>
+<th>Vendor</th>
+<th>Quotation</th>
+<th>PO Date</th>
+<th>Amount</th>
+<th>Status</th>
+<th align="center">Action</th>
+
+</tr>
+
+{% for purchase_order in purchase_orders %}
+
+<tr style="border-bottom:1px solid #E5E5E5;">
+
+<td>{{ purchase_order.po_number }}</td>
+
+<td>{{ purchase_order.vendor.company_name }}</td>
+
+<td>{{ purchase_order.quotation.quotation_number }}</td>
+
+<td>{{ purchase_order.po_date }}</td>
+
+<td>₹ {{ purchase_order.amount }}</td>
+
+<td>
+
+{% if purchase_order.status == "Pending" %}
+
+<span
+style="
+background:#FFF3CD;
+color:#856404;
+padding:5px 12px;
+border-radius:15px;">
+
+Pending
+
+</span>
+
+{% elif purchase_order.status == "Approved" %}
+
+<span
+style="
+background:#D4EDDA;
+color:#155724;
+padding:5px 12px;
+border-radius:15px;">
+
+Approved
+
+</span>
+
+{% else %}
+
+<span
+style="
+background:#F8D7DA;
+color:#721C24;
+padding:5px 12px;
+border-radius:15px;">
+
+Rejected
+
+</span>
+
+{% endif %}
+
+</td>
+
+<td align="center">
+
+<div style="
+display:flex;
+justify-content:center;
+align-items:center;
+gap:8px;
+white-space:nowrap;
+">
+
+    <!-- Edit -->
+
+    <a href="{% url 'edit_purchase_order' purchase_order.id %}"
+       title="Edit"
+       style="
+       width:36px;
+       height:36px;
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       background:#FFC107;
+       color:black;
+       border-radius:6px;
+       text-decoration:none;">
+
+        <i class="fa-solid fa-pen"></i>
+
+    </a>
+
+    <!-- Delete -->
+
+    <a href="{% url 'delete_purchase_order' purchase_order.id %}"
+       title="Delete"
+       onclick="return confirm('Delete this Purchase Order?')"
+       style="
+       width:36px;
+       height:36px;
+       display:flex;
+       justify-content:center;
+       align-items:center;
+       background:#DC3545;
+       color:white;
+       border-radius:6px;
+       text-decoration:none;">
+
+        <i class="fa-solid fa-trash"></i>
+
+    </a>
+
+</div>
+
+</td>
+
+&nbsp;
+
+{% if purchase_order.status == "Approved" %}
+
+<a href="{% url 'generate_invoice' purchase_order.id %}"
+style="
+background:#0056D2;
+color:white;
+padding:7px 14px;
+text-decoration:none;
+border-radius:4px;">
+
+Upload Invoice
+
+</a>
+
+&nbsp;
+
+{% endif %}
+
+
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="7"
+align="center"
+style="padding:30px;">
+
+No Purchase Orders Found
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Vendor Dashboard</title>
+
+</head>
+
+<body>
+
+    <h1>Welcome Vendor</h1>
+
+    <h3>Vendor Service Portal</h3>
+
+    <ul>
+
+        <li>
+           <a href="{% url 'vendor_quotation_list' %}">
+    My Quotations
+</a>
+        </li>
+
+        <li>
+            <a href="#">My Purchase Orders</a>
+        </li>
+
+        <li>
+            <a href="#">My Invoices</a>
+        </li>
+
+        <li>
+            <a href="{% url 'logout' %}">
+                Logout
+            </a>
+        </li>
+
+    </ul>
+
+</body>
+
+</html>

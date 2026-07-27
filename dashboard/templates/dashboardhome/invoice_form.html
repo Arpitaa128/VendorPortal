@@ -1,0 +1,70 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Add Invoice
+{% endblock %}
+
+{% block content %}
+
+<h2>Add Invoice</h2>
+
+<form method="POST" enctype="multipart/form-data">
+
+{% csrf_token %}
+
+<table cellpadding="10">
+
+<tr>
+<td>Vendor</td>
+<td>{{ form.vendor }}</td>
+</tr>
+
+<tr>
+<td>Invoice Number</td>
+<td>{{ form.invoice_number }}</td>
+</tr>
+
+<tr>
+<td>Invoice Date</td>
+<td>{{ form.invoice_date }}</td>
+</tr>
+
+<tr>
+<td>Amount</td>
+<td>{{ form.amount }}</td>
+</tr>
+
+<tr>
+<td>Invoice File</td>
+<td>{{ form.invoice_file }}</td>
+</tr>
+
+<tr>
+<td>Status</td>
+<td>{{ form.status }}</td>
+</tr>
+
+<tr>
+<td>Remarks</td>
+<td>{{ form.remarks }}</td>
+</tr>
+
+<tr>
+
+<td></td>
+
+<td>
+
+<input
+type="submit"
+value="Save Invoice">
+
+</td>
+
+</tr>
+
+</table>
+
+</form>
+
+{% endblock %}

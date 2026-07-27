@@ -1,0 +1,48 @@
+{% extends 'dashboardhome/base.html' %}
+
+{% block content %}
+
+<h2 style="margin-bottom:25px;color:#07265E;">
+My Profile
+</h2>
+
+<table width="500"
+cellpadding="12"
+style="
+background:white;
+border-radius:10px;
+box-shadow:0 3px 10px rgba(0,0,0,.08);">
+
+<tr>
+    <td width="180"><b>Username</b></td>
+    <td>{{ request.user.username }}</td>
+</tr>
+
+<tr>
+    <td><b>First Name</b></td>
+    <td>{{ request.user.first_name }}</td>
+</tr>
+
+<tr>
+    <td><b>Last Name</b></td>
+    <td>{{ request.user.last_name }}</td>
+</tr>
+
+<tr>
+    <td><b>Email</b></td>
+    <td>{{ request.user.email }}</td>
+</tr>
+
+<tr>
+    <td><b>Date Joined</b></td>
+    <td>{{ request.user.date_joined }}</td>
+</tr>
+
+<tr>
+    <td><b>Last Login</b></td>
+    <td>{{ request.user.last_login }}</td>
+</tr>
+
+</table>
+
+{% endblock %}

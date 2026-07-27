@@ -1,0 +1,211 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Quotation Management
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Header -->
+
+<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:25px;">
+
+<tr>
+
+<td width="50%">
+
+<div style="font-size:28px;font-weight:bold;color:#17336E;">
+{% if form.instance.pk %}
+Edit Quotation
+{% else %}
+Register New Quotation
+{% endif %}
+</div>
+
+<div style="font-size:14px;color:#777;">
+Create and manage vendor quotation requests
+</div>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<form method="POST">
+
+{% csrf_token %}
+
+<table
+width="100%"
+cellpadding="20"
+cellspacing="0"
+style="
+background:#FFFFFF;
+border:1px solid #E5E5E5;
+border-radius:10px;">
+
+<tr>
+
+<td width="50%">
+
+<label><b>Quotation Number</b></label>
+
+<br><br>
+
+{{ form.quotation_number }}
+
+</td>
+
+<td width="50%">
+
+<label><b>Vendor</b></label>
+
+<br><br>
+
+{{ form.vendor }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<label><b>Requirement</b></label>
+
+<br><br>
+
+{{ form.requirement }}
+
+</td>
+
+<td>
+
+<label><b>Quotation Date</b></label>
+
+<br><br>
+
+{{ form.quotation_date }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<label><b>Valid Till</b></label>
+
+<br><br>
+
+{{ form.valid_till }}
+
+</td>
+
+<td>
+
+<label><b>Amount</b></label>
+
+<br><br>
+
+{{ form.amount }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td colspan="2">
+
+<label><b>Description</b></label>
+
+<br><br>
+
+{{ form.description }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td colspan="2">
+
+<label><b>Remarks</b></label>
+
+<br><br>
+
+{{ form.remarks }}
+
+</td>
+
+</tr>
+
+
+<tr>
+
+<td>
+
+<label><b>Status</b></label>
+
+<br><br>
+
+{{ form.status }}
+
+</td>
+
+<td align="right" valign="bottom">
+
+<a href="{% url 'quotation_list' %}"
+style="
+display:inline-block;
+background:#6C757D;
+color:white;
+text-decoration:none;
+padding:12px 30px;
+border-radius:6px;
+font-weight:bold;
+margin-right:10px;">
+
+Cancel
+
+</a>
+
+<button
+type="submit"
+style="
+background:#0056D2;
+color:white;
+padding:12px 30px;
+border:none;
+border-radius:6px;
+font-size:15px;
+font-weight:bold;
+cursor:pointer;">
+
+{% if form.instance.pk %}
+Update Quotation
+{% else %}
+Save Quotation
+{% endif %}
+
+</button>
+
+</td>
+
+</tr>
+
+</table>
+
+</form>
+
+{% endblock %}
