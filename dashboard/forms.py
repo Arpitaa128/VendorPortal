@@ -1,6 +1,6 @@
 from django import forms
 from .models import Vendor
-from .models import Vendor, Quotation, Invoice, PurchaseOrder
+from .models import ( Vendor,Quotation,Invoice,PurchaseOrder,VendorRegistration, VendorContact,VendorDocument,)
 from django import forms
 from captcha.fields import CaptchaField
 
@@ -171,4 +171,113 @@ class LoginForm(forms.Form):
             "style": "width:95%;height:40px;border:none;outline:none;font-size:14px;"
         })
     )
+
+    # ============================
+# Vendor Registration Forms
+# ============================
+
+class VendorRegistrationForm(forms.ModelForm):
+
+    class Meta:
+
+        model = VendorRegistration
+
+        exclude = [
+            "status",
+            "created_at",
+        ]
+
+        widgets = {
+
+            "company_name": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Enter Company Name"
+            }),
+
+            "legal_name": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Enter Legal Entity Name"
+            }),
+
+            "business_type": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Business Type"
+            }),
+
+            "registration_number": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Registration Number"
+            }),
+
+            "gst_number": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"GST Number"
+            }),
+
+            "pan_number": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"PAN Number"
+            }),
+
+            "establishment_year": forms.NumberInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Year of Establishment"
+            }),
+
+            "industry": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Industry"
+            }),
+
+            "products_services": forms.Textarea(attrs={
+                "rows":3,
+                "style":"width:98%;padding:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Products / Services"
+            }),
+
+            "annual_turnover": forms.NumberInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Annual Turnover"
+            }),
+
+            "country": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Country"
+            }),
+
+            "state": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"State"
+            }),
+
+            "city": forms.TextInput(attrs={
+                "style":"width:95%;height:42px;padding-left:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"City"
+            }),
+
+            "address": forms.Textarea(attrs={
+                "rows":4,
+                "style":"width:98%;padding:10px;border:1px solid #CCCCCC;border-radius:6px;",
+                "placeholder":"Registered Address"
+            }),
+        }
+
+class VendorContactForm(forms.ModelForm):
+
+    class Meta:
+        model = VendorContact
+
+        exclude = [
+            "vendor",
+        ]
+
+
+class VendorDocumentForm(forms.ModelForm):
+
+    class Meta:
+        model = VendorDocument
+
+        exclude = [
+            "vendor",
+        ]
    

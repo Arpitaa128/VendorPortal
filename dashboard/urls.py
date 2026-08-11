@@ -21,10 +21,10 @@ urlpatterns = [
     path("invoices/",views.invoice_list,name="invoice_list"),
     path("invoices/add/",views.add_invoice,name="add_invoice"),
     path("invoices/edit/<int:id>/",views.edit_invoice,name="edit_invoice"),
-path("invoices/delete/<int:id>/",views.delete_invoice,name="delete_invoice"),
-path("invoice/approve/<int:id>/",views.approve_invoice,name="approve_invoice",),
-path("invoice/reject/<int:id>/",views.reject_invoice,name="reject_invoice",),
-path( "vendor/login/",views.vendor_login,  name="vendor_login"),
+    path("invoices/delete/<int:id>/",views.delete_invoice,name="delete_invoice"),
+    path("invoice/approve/<int:id>/",views.approve_invoice,name="approve_invoice",),
+    path("invoice/reject/<int:id>/",views.reject_invoice,name="reject_invoice",),
+    path( "vendor/login/",views.vendor_login,  name="vendor_login"),
 path("vendor/dashboard/",views.vendor_dashboard,name="vendor_dashboard"),
 path("vendor/quotations/",views.vendor_quotation_list,name="vendor_quotation_list"),
 path("purchase-orders/",views.purchase_order_list,name="purchase_order_list"),
@@ -34,6 +34,28 @@ path("purchase-orders/delete/<int:id>/",views.delete_purchase_order,name="delete
 path("purchase-orders/create/<int:quotation_id>/",views.generate_purchase_order,name="generate_purchase_order"),
 path('profile/', views.profile, name='profile'),
 path('register/', views.register, name='register'),
+path("vendor-registration/company/",views.company_information,name="company_information"),
+path("vendor-registration/contact/",views.contact_information,name="contact_information"),
+path("vendor-registration/documents/",views.documents_review,name="documents_review"),
+path("vendor-registration/success/", views.registration_success,name="registration_success"),
+
+path("vendor-registration/approve/<int:id>/",views.approve_vendor,name="approve_vendor",),
+path(
+    "vendor/purchase-orders/",
+    views.vendor_purchase_order_list,
+    name="vendor_purchase_order_list",
+),
+path(
+    "invoices/",
+    views.invoice_list,
+    name="invoice_list",
+),
+path(
+    "vendor/invoices/",
+    views.vendor_invoice_list,
+    name="vendor_invoice_list"
+),
 
 ]
+
 

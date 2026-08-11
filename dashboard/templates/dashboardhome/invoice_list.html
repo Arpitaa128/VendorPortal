@@ -1,183 +1,215 @@
 {% extends "dashboardhome/base.html" %}
 
 {% block title %}
+{% if request.user.is_staff or request.user.is_superuser %}
 Invoice Management
+{% else %}
+My Invoices
+{% endif %}
 {% endblock %}
 
 {% block content %}
 
-<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:25px;">
-    <tr>
+<!-- ================= PAGE HEADER ================= -->
 
-        <td>
-            <div style="font-size:30px;font-weight:bold;color:#17336E;">
-                Invoice Management
-            </div>
-
-            <div style="font-size:14px;color:#777;margin-top:5px;">
-                Dashboard > Invoice Management
-            </div>
-        </td>
-
-        <td align="right">
-
-            <a href="{% url 'add_invoice' %}"
-               style="
-               background:#0056D2;
-               color:white;
-               text-decoration:none;
-               padding:12px 22px;
-               border-radius:6px;
-               font-weight:bold;">
-
-                + Upload Invoice
-
-            </a>
-
-        </td>
-
-    </tr>
-</table>
-
-<!-- Summary Cards -->
-
-<table width="100%" cellpadding="8" cellspacing="0" style="margin-bottom:25px;">
-
-<tr>
-
-<td width="25%">
-
-<table width="100%" cellpadding="18"
-style="
-background:white;
-border:1px solid #E6E6E6;
-border-radius:8px;">
+<table width="100%" cellpadding="0" cellspacing="0">
 
 <tr>
 
 <td>
 
-<div style="font-size:13px;color:#777;">
-Total Invoices
-</div>
+{% if request.user.is_staff or request.user.is_superuser %}
 
 <div style="
 font-size:30px;
 font-weight:bold;
+color:#17336E;">
+Invoice Management
+</div>
+
+<div style="
+font-size:14px;
+color:#777;
+margin-top:5px;">
+Dashboard > Invoice Management
+</div>
+
+{% else %}
+
+<div style="
+font-size:30px;
+font-weight:bold;
+color:#17336E;">
+My Invoices
+</div>
+
+<div style="
+font-size:14px;
+color:#777;
+margin-top:5px;">
+Dashboard > My Invoices
+</div>
+
+{% endif %}
+
+</td>
+
+
+<td align="right">
+
+{% if request.user.is_staff or request.user.is_superuser %}
+
+<a href="{% url 'add_invoice' %}"
+style="
+background:#0056D2;
+color:white;
+text-decoration:none;
+padding:12px 22px;
+border-radius:6px;
+font-weight:bold;">
+
++ Upload Invoice
+
+</a>
+
+{% endif %}
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br>
+
+
+<!-- ================= SUMMARY CARDS ================= -->
+
+<table width="100%" cellpadding="10" cellspacing="0">
+
+<tr>
+
+<td width="25%">
+
+<div style="
+background:white;
+padding:20px;
+border-radius:8px;
+border:1px solid #E5E5E5;">
+
+<div style="
+font-size:13px;
+color:#777;">
+
+Total Invoices
+
+</div>
+
+<div style="
+font-size:25px;
+font-weight:bold;
 color:#17336E;
-margin-top:10px;">
+margin-top:5px;">
 
 {{ invoices|length }}
 
 </div>
 
-</td>
-
-</tr>
-
-</table>
+</div>
 
 </td>
+
 
 <td width="25%">
 
-<table width="100%" cellpadding="18"
-style="
-background:#FFF9E8;
-border:1px solid #F0E3AE;
-border-radius:8px;">
+<div style="
+background:white;
+padding:20px;
+border-radius:8px;
+border:1px solid #E5E5E5;">
 
-<tr>
+<div style="
+font-size:13px;
+color:#777;">
 
-<td>
-
-<div style="font-size:13px;color:#777;">
 Pending
+
 </div>
 
 <div style="
-font-size:30px;
+font-size:25px;
 font-weight:bold;
-color:#E69500;
-margin-top:10px;">
+color:#F59E0B;
+margin-top:5px;">
 
 {{ pending }}
 
 </div>
 
-</td>
-
-</tr>
-
-</table>
+</div>
 
 </td>
+
 
 <td width="25%">
 
-<table width="100%" cellpadding="18"
-style="
-background:#EDF9F0;
-border:1px solid #D8EFD8;
-border-radius:8px;">
+<div style="
+background:white;
+padding:20px;
+border-radius:8px;
+border:1px solid #E5E5E5;">
 
-<tr>
+<div style="
+font-size:13px;
+color:#777;">
 
-<td>
-
-<div style="font-size:13px;color:#777;">
 Approved
+
 </div>
 
 <div style="
-font-size:30px;
+font-size:25px;
 font-weight:bold;
-color:#198754;
-margin-top:10px;">
+color:#16A34A;
+margin-top:5px;">
 
 {{ approved }}
 
 </div>
 
-</td>
-
-</tr>
-
-</table>
+</div>
 
 </td>
+
 
 <td width="25%">
 
-<table width="100%" cellpadding="18"
-style="
-background:#F4F0FF;
-border:1px solid #DDD2FF;
-border-radius:8px;">
+<div style="
+background:white;
+padding:20px;
+border-radius:8px;
+border:1px solid #E5E5E5;">
 
-<tr>
+<div style="
+font-size:13px;
+color:#777;">
 
-<td>
-
-<div style="font-size:13px;color:#777;">
 Total Amount
+
 </div>
 
 <div style="
-font-size:24px;
+font-size:25px;
 font-weight:bold;
-color:#6F42C1;
-margin-top:10px;">
+color:#17336E;
+margin-top:5px;">
 
 ₹ {{ total_amount }}
 
 </div>
 
-</td>
-
-</tr>
-
-</table>
+</div>
 
 </td>
 
@@ -185,9 +217,73 @@ margin-top:10px;">
 
 </table>
 
-<!-- Search -->
 
-<form method="get">
+<br>
+
+
+<!-- ================= FILTER / RESET ================= -->
+
+<table width="100%" cellpadding="10" cellspacing="0">
+
+<tr>
+
+<td>
+
+<form method="GET">
+
+<input
+type="text"
+name="search"
+value="{{ request.GET.search }}"
+placeholder="Search Invoice Number..."
+style="
+height:40px;
+width:280px;
+padding-left:12px;
+border:1px solid #CCCCCC;
+border-radius:6px;
+font-size:14px;">
+
+<button
+type="submit"
+style="
+height:40px;
+padding:0 20px;
+background:#17336E;
+color:white;
+border:none;
+border-radius:6px;
+cursor:pointer;">
+
+Search
+
+</button>
+
+<a
+href="{% url 'invoice_list' %}"
+style="
+margin-left:10px;
+text-decoration:none;
+color:#555;
+font-size:14px;">
+
+Reset
+
+</a>
+
+</form>
+
+</td>
+
+</tr>
+
+</table>
+
+
+<br>
+
+
+<!-- ================= INVOICE TABLE ================= -->
 
 <table
 width="100%"
@@ -196,126 +292,63 @@ cellspacing="0"
 style="
 background:white;
 border:1px solid #E5E5E5;
+border-collapse:collapse;
 border-radius:8px;
-margin-bottom:25px;">
+font-size:14px;">
 
-<tr>
-
-<td width="40%">
-
-<input
-type="text"
-name="search"
-value="{{ request.GET.search }}"
-placeholder="Search Invoice Number or Vendor"
-style="
-width:100%;
-padding:10px;
-border:1px solid #CCC;
-border-radius:5px;">
-
-</td>
-
-<td width="20%">
-
-<select
-name="status"
-style="
-width:100%;
-padding:10px;
-border:1px solid #CCC;
-border-radius:5px;">
-
-<option value="">All Status</option>
-
-<option value="Pending">Pending</option>
-
-<option value="Approved">Approved</option>
-
-<option value="Rejected">Rejected</option>
-
-</select>
-
-</td>
-
-<td width="20%">
-
-<input
-type="submit"
-value="Search"
-style="
-background:#0056D2;
-color:white;
-padding:10px 22px;
-border:none;
-border-radius:5px;
-cursor:pointer;">
-
-</td>
-
-<td align="right">
-
-<a href="{% url 'invoice_list' %}"
-style="
-text-decoration:none;
-color:#0056D2;
+<tr style="
+background:#F4F7FC;
+color:#17336E;
 font-weight:bold;">
 
-Reset
+<th align="left">
+Invoice Number
+</th>
 
-</a>
+{% if request.user.is_staff or request.user.is_superuser %}
 
-</td>
+<th align="left">
+Vendor
+</th>
 
-</tr>
+{% endif %}
 
-</table>
+<th align="left">
+Invoice Date
+</th>
 
-</form>
+<th align="left">
+Amount
+</th>
 
-<!-- Main Layout -->
+<th align="left">
+Status
+</th>
 
-<table width="100%" cellpadding="0" cellspacing="15">
+<th align="left">
+File
+</th>
 
-<tr>
-
-<td width="70%" valign="top">
-
-    <table
-width="100%"
-cellpadding="12"
-cellspacing="0"
-style="
-background:white;
-border:1px solid #E5E5E5;
-border-collapse:collapse;
-border-radius:8px;">
-
-<tr style="background:#17336E;color:white;">
-
-<th align="left">Invoice No</th>
-<th align="left">Vendor</th>
-<th align="left">Date</th>
-<th align="right">Amount</th>
-<th align="center">Status</th>
-<th align="center">PDF</th>
-<th align="center">Action</th>
+<th align="left">
+Action
+</th>
 
 </tr>
+
 
 {% for invoice in invoices %}
 
-<tr style="border-bottom:1px solid #EEEEEE;">
+<tr style="
+border-bottom:1px solid #E5E5E5;">
 
 <td>
 
-<b style="color:#17336E;">
-
 {{ invoice.invoice_number }}
 
-</b>
-
 </td>
+
+
+{% if request.user.is_staff or request.user.is_superuser %}
 
 <td>
 
@@ -323,30 +356,33 @@ border-radius:8px;">
 
 </td>
 
+{% endif %}
+
+
 <td>
 
 {{ invoice.invoice_date }}
 
 </td>
 
-<td align="right">
+
+<td>
 
 ₹ {{ invoice.amount }}
 
 </td>
 
-<td align="center">
+
+<td>
 
 {% if invoice.status == "Pending" %}
 
-<span
-style="
-background:#FFF3CD;
-color:#856404;
-padding:5px 14px;
+<span style="
+background:#FFF4D6;
+color:#B7791F;
+padding:6px 12px;
 border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+font-size:12px;">
 
 Pending
 
@@ -354,29 +390,38 @@ Pending
 
 {% elif invoice.status == "Approved" %}
 
-<span
-style="
-background:#D4EDDA;
-color:#155724;
-padding:5px 14px;
+<span style="
+background:#E8F5E9;
+color:#2E7D32;
+padding:6px 12px;
 border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+font-size:12px;">
 
 Approved
 
 </span>
 
+{% elif invoice.status == "Paid" %}
+
+<span style="
+background:#E3F2FD;
+color:#1565C0;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;">
+
+Paid
+
+</span>
+
 {% else %}
 
-<span
-style="
-background:#F8D7DA;
-color:#721C24;
-padding:5px 14px;
+<span style="
+background:#FDECEC;
+color:#C62828;
+padding:6px 12px;
 border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+font-size:12px;">
 
 Rejected
 
@@ -386,7 +431,8 @@ Rejected
 
 </td>
 
-<td align="center">
+
+<td>
 
 {% if invoice.invoice_file %}
 
@@ -394,12 +440,9 @@ Rejected
 href="{{ invoice.invoice_file.url }}"
 target="_blank"
 style="
-background:#17A2B8;
-color:white;
-padding:6px 12px;
-border-radius:5px;
+color:#0056D2;
 text-decoration:none;
-font-size:12px;">
+font-weight:bold;">
 
 PDF
 
@@ -413,79 +456,58 @@ PDF
 
 </td>
 
-<td align="center" style="white-space:nowrap;">
 
-<!-- View -->
+<td>
 
-<a href="?invoice={{ invoice.id }}"
-title="View"
+{% if request.user.is_staff or request.user.is_superuser %}
+
+<a
+href="?invoice_id={{ invoice.id }}"
 style="
-display:inline-block;
-width:34px;
-height:34px;
-line-height:34px;
-text-align:center;
-background:#0d6efd;
+background:#17336E;
 color:white;
-border-radius:6px;
+padding:7px 14px;
+border-radius:5px;
 text-decoration:none;
-margin-right:5px;">
+font-size:12px;">
 
-<i class="fa-solid fa-eye"></i>
+View
 
 </a>
 
-<!-- Edit -->
+{% else %}
 
-<a href="{% url 'edit_invoice' invoice.id %}"
-title="Edit"
+<a
+href="?invoice_id={{ invoice.id }}"
 style="
-display:inline-block;
-width:34px;
-height:34px;
-line-height:34px;
-text-align:center;
-background:#ffc107;
-color:black;
-border-radius:6px;
-text-decoration:none;
-margin-right:5px;">
-
-<i class="fa-solid fa-pen"></i>
-
-</a>
-
-<!-- Delete -->
-
-<a href="{% url 'delete_invoice' invoice.id %}"
-onclick="return confirm('Delete this invoice?')"
-title="Delete"
-style="
-display:inline-block;
-width:34px;
-height:34px;
-line-height:34px;
-text-align:center;
-background:#dc3545;
+background:#17336E;
 color:white;
-border-radius:6px;
-text-decoration:none;">
+padding:7px 14px;
+border-radius:5px;
+text-decoration:none;
+font-size:12px;">
 
-<i class="fa-solid fa-trash"></i>
+View
 
 </a>
+
+{% endif %}
 
 </td>
 
 </tr>
 
+
 {% empty %}
 
 <tr>
 
-<td colspan="7"
+<td
+colspan="7"
 align="center"
-style="padding:40px;">
+style="
+padding:40px;
+color:#777;">
 
 No invoices available.
 
@@ -497,131 +519,107 @@ No invoices available.
 
 </table>
 
-</td>
 
-<!-- Right Panel -->
+<br>
 
-<td width="30%" valign="top">
 
-<table
-width="100%"
-cellpadding="18"
-cellspacing="0"
-style="
+<!-- ================= INVOICE DETAILS ================= -->
+
+<div style="
 background:white;
 border:1px solid #E5E5E5;
-border-radius:8px;">
+border-radius:8px;
+padding:25px;">
 
-<tr>
-
-<td>
-
-<div
-style="
+<div style="
 font-size:22px;
 font-weight:bold;
-color:#17336E;">
+color:#17336E;
+margin-bottom:20px;">
 
 Invoice Details
 
 </div>
 
-<hr>
 
 {% if selected_invoice %}
 
 <table
 width="100%"
-cellpadding="8"
+cellpadding="10"
 cellspacing="0">
 
 <tr>
 
-<td
-style="
-font-weight:bold;
-width:45%;">
-
+<td width="25%" style="font-weight:bold;color:#555;">
 Invoice No
-
 </td>
 
 <td>
-
 {{ selected_invoice.invoice_number }}
-
 </td>
 
 </tr>
 
+
+{% if request.user.is_staff or request.user.is_superuser %}
+
 <tr>
 
-<td style="font-weight:bold;">
-
+<td style="font-weight:bold;color:#555;">
 Vendor
-
 </td>
 
 <td>
-
 {{ selected_invoice.vendor.company_name }}
-
 </td>
 
 </tr>
 
+{% endif %}
+
+
 <tr>
 
-<td style="font-weight:bold;">
-
+<td style="font-weight:bold;color:#555;">
 Invoice Date
-
 </td>
 
 <td>
-
 {{ selected_invoice.invoice_date }}
-
 </td>
 
 </tr>
 
+
 <tr>
 
-<td style="font-weight:bold;">
-
+<td style="font-weight:bold;color:#555;">
 Amount
-
 </td>
 
 <td>
-
 ₹ {{ selected_invoice.amount }}
-
 </td>
 
 </tr>
 
+
 <tr>
 
-<td style="font-weight:bold;">
-
+<td style="font-weight:bold;color:#555;">
 Status
-
 </td>
 
 <td>
 
 {% if selected_invoice.status == "Pending" %}
 
-<span
-style="
-background:#FFF3CD;
-color:#856404;
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+<span style="
+background:#FFF4D6;
+color:#B7791F;
+padding:6px 12px;
+border-radius:20px;">
 
 Pending
 
@@ -629,29 +627,35 @@ Pending
 
 {% elif selected_invoice.status == "Approved" %}
 
-<span
-style="
-background:#D4EDDA;
-color:#155724;
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+<span style="
+background:#E8F5E9;
+color:#2E7D32;
+padding:6px 12px;
+border-radius:20px;">
 
 Approved
 
 </span>
 
+{% elif selected_invoice.status == "Paid" %}
+
+<span style="
+background:#E3F2FD;
+color:#1565C0;
+padding:6px 12px;
+border-radius:20px;">
+
+Paid
+
+</span>
+
 {% else %}
 
-<span
-style="
-background:#F8D7DA;
-color:#721C24;
-padding:5px 12px;
-border-radius:20px;
-font-size:12px;
-font-weight:bold;">
+<span style="
+background:#FDECEC;
+color:#C62828;
+padding:6px 12px;
+border-radius:20px;">
 
 Rejected
 
@@ -663,26 +667,27 @@ Rejected
 
 </tr>
 
+
 <tr>
 
-<td
-style="font-weight:bold;">
-
+<td style="font-weight:bold;color:#555;">
 Remarks
-
 </td>
 
 <td>
-
 {{ selected_invoice.remarks|default:"-" }}
-
 </td>
 
 </tr>
 
-</table>
 
-<br>
+<tr>
+
+<td style="font-weight:bold;color:#555;">
+Invoice File
+</td>
+
+<td>
 
 {% if selected_invoice.invoice_file %}
 
@@ -690,107 +695,82 @@ Remarks
 href="{{ selected_invoice.invoice_file.url }}"
 target="_blank"
 style="
-display:block;
-background:#0D6EFD;
-color:white;
-padding:12px;
-text-align:center;
-text-decoration:none;
-border-radius:5px;
-font-weight:bold;">
+color:#0056D2;
+font-weight:bold;
+text-decoration:none;">
 
 Download Invoice
 
 </a>
 
-<br>
+{% else %}
+
+-
 
 {% endif %}
 
+</td>
+
+</tr>
+
+</table>
+
+
+<br>
+
+
+<!-- ADMIN ONLY ACTIONS -->
+
+{% if request.user.is_staff or request.user.is_superuser %}
+
 {% if selected_invoice.status == "Pending" %}
-
-<table
-width="100%"
-cellpadding="5">
-
-<tr>
-
-<td>
 
 <a
 href="{% url 'approve_invoice' selected_invoice.id %}"
 style="
-display:block;
-background:#198754;
+background:#28A745;
 color:white;
+padding:10px 20px;
 text-decoration:none;
-padding:12px;
-text-align:center;
-border-radius:5px;
-font-weight:bold;">
+border-radius:6px;
+margin-right:10px;">
 
 Approve
 
 </a>
 
-</td>
-
-<td>
 
 <a
 href="{% url 'reject_invoice' selected_invoice.id %}"
 style="
-display:block;
 background:#DC3545;
 color:white;
+padding:10px 20px;
 text-decoration:none;
-padding:12px;
-text-align:center;
-border-radius:5px;
-font-weight:bold;">
+border-radius:6px;">
 
 Reject
 
 </a>
 
-</td>
-
-</tr>
-
-</table>
+{% endif %}
 
 {% endif %}
 
+
 {% else %}
 
-<div
-style="
+<div style="
 text-align:center;
-padding:50px 20px;
-color:#888;">
-
-<h3>No Invoice Selected</h3>
-
-<p>
+padding:30px;
+color:#777;">
 
 Click the <b>View</b> button in the table to see invoice details.
-
-</p>
 
 </div>
 
 {% endif %}
 
-</td>
-
-</tr>
-
-</table>
-
-</td>
-
-</tr>
-
-</table>
+</div>
 
 {% endblock %}

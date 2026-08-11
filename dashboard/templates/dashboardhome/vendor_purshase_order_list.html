@@ -1,0 +1,91 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+My Purchase Orders
+{% endblock %}
+
+{% block content %}
+
+<div style="
+background:#ffffff;
+padding:25px;
+border-radius:12px;
+box-shadow:0 2px 8px rgba(0,0,0,.05);">
+
+<h2 style="
+margin:0 0 20px;
+color:#17336E;">
+My Purchase Orders
+</h2>
+
+<table width="100%"
+cellpadding="12"
+cellspacing="0"
+style="
+border-collapse:collapse;
+font-size:14px;">
+
+<tr style="
+background:#F4F7FC;
+color:#17336E;
+font-weight:bold;">
+
+<th align="left">PO Number</th>
+<th align="left">PO Date</th>
+<th align="left">Quotation</th>
+<th align="left">Amount</th>
+<th align="left">Status</th>
+
+</tr>
+
+{% for po in purchase_orders %}
+
+<tr style="border-bottom:1px solid #E5E7EB;">
+
+<td>{{ po.po_number }}</td>
+
+<td>{{ po.po_date }}</td>
+
+<td>{{ po.quotation.quotation_number }}</td>
+
+<td>₹ {{ po.amount }}</td>
+
+<td>
+
+<span style="
+padding:6px 12px;
+border-radius:20px;
+background:#E8F5E9;
+color:#2E7D32;">
+
+{{ po.status }}
+
+</span>
+
+</td>
+
+</tr>
+
+{% empty %}
+
+<tr>
+
+<td colspan="5"
+style="
+text-align:center;
+padding:30px;
+color:#777;">
+
+No purchase orders available.
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+</div>
+
+{% endblock %}
