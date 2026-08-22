@@ -3,17 +3,11 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import user_passes_test
-from django.contrib.auth import authenticate, login
-from .decorators import admin_required, vendor_required
-from django.contrib.auth import authenticate, login
 from django.db.models import Sum
 from django.contrib.auth.models import User
 from django.contrib import messages
-from django.shortcuts import render, redirect
 from functools import wraps
-from django.shortcuts import redirect
+
 from .models import (
     Vendor,
     Quotation,
@@ -23,6 +17,7 @@ from .models import (
     VendorContact,
     VendorDocument,
 )
+
 from .forms import (
     LoginForm,
     VendorForm,
@@ -33,17 +28,7 @@ from .forms import (
     VendorContactForm,
     VendorDocumentForm,
 )
-from .decorators import admin_required, vendor_required
-from django.contrib.auth import authenticate, login
-from django.db.models import Sum
-from django.contrib.auth.models import User
-from django.contrib import messages
-from django.shortcuts import render, redirect
-def admin_required(view_func):
-    return user_passes_test(
-        lambda user: user.is_authenticated and user.is_staff,
-        login_url="vendor_dashboard"
-    )(view_func)
+
 
 def admin_required(view_func):
     @wraps(view_func)
@@ -58,7 +43,6 @@ def admin_required(view_func):
         return view_func(request, *args, **kwargs)
 
     return _wrapped_view
-
 
 @login_required(login_url="login")
 @admin_required
@@ -208,7 +192,7 @@ def logout_view(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def vendor_list(request):
 
     search = request.GET.get("search")
@@ -232,7 +216,7 @@ def vendor_list(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def add_vendor(request):
 
     if request.method == "POST":
@@ -254,7 +238,7 @@ def add_vendor(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def edit_vendor(request, id):
 
     vendor = get_object_or_404(Vendor, id=id)
@@ -280,7 +264,7 @@ def edit_vendor(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def delete_vendor(request, id):
 
     vendor = get_object_or_404(Vendor, id=id)
@@ -292,7 +276,7 @@ def delete_vendor(request, id):
 # Quotation
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def quotation_list(request):
 
     quotations = Quotation.objects.all()
@@ -310,7 +294,7 @@ def quotation_list(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def add_quotation(request):
 
     if request.method == "POST":
@@ -335,7 +319,7 @@ def add_quotation(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def edit_quotation(request, id):
 
     quotation = get_object_or_404(Quotation, id=id)
@@ -362,7 +346,7 @@ def edit_quotation(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def delete_quotation(request, id):
 
     quotation = get_object_or_404(Quotation, id=id)
@@ -373,7 +357,7 @@ def delete_quotation(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def approve_quotation(request, id):
     quotation = get_object_or_404(Quotation, id=id)
     quotation.status = "Approved"
@@ -382,7 +366,7 @@ def approve_quotation(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def reject_quotation(request, id):
     quotation = get_object_or_404(Quotation, id=id)
     quotation.status = "Rejected"
@@ -394,7 +378,7 @@ from django.db.models import Sum
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def invoice_list(request):
 
     invoices = Invoice.objects.all()
@@ -422,7 +406,7 @@ def invoice_list(request):
     )
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def add_invoice(request):
 
     if request.method == "POST":
@@ -453,7 +437,7 @@ def add_invoice(request):
     )
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def edit_invoice(request, id):
     invoice = get_object_or_404(Invoice, id=id)
 
@@ -475,7 +459,7 @@ def edit_invoice(request, id):
     )
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def delete_invoice(request, id):
 
     invoice = get_object_or_404(Invoice, id=id)
@@ -486,7 +470,7 @@ def delete_invoice(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def approve_invoice(request, id):
 
     invoice = get_object_or_404(Invoice, id=id)
@@ -498,7 +482,7 @@ def approve_invoice(request, id):
     return redirect("invoice_list")
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def reject_invoice(request, id):
 
     invoice = get_object_or_404(Invoice, id=id)
@@ -561,7 +545,7 @@ def vendor_login(request):
     )
 
 @login_required(login_url="vendor_login")
-@vendor_required
+@admin_required
 def vendor_dashboard(request):
 
     vendor = get_object_or_404(
@@ -578,8 +562,7 @@ def vendor_dashboard(request):
     )
 
 @login_required(login_url="login")
-@vendor_required
-@user_passes_test(admin_required, login_url="login")
+@admin_required
 def vendor_quotation_list(request):
 
     vendor = get_object_or_404(
@@ -601,7 +584,7 @@ def vendor_quotation_list(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def purchase_order_list(request):
 
     purchase_orders = PurchaseOrder.objects.all()
@@ -616,7 +599,7 @@ def purchase_order_list(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def generate_purchase_order(request, quotation_id):
 
     quotation = get_object_or_404(
@@ -680,7 +663,7 @@ def add_purchase_order(request):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def edit_purchase_order(request, id):
 
     purchase_order = get_object_or_404(
@@ -717,7 +700,7 @@ def edit_purchase_order(request, id):
 
 @login_required(login_url="login")
 @admin_required
-@user_passes_test(admin_required, login_url="login")
+
 def delete_purchase_order(request, id):
 
     purchase_order = get_object_or_404(
@@ -963,7 +946,7 @@ def approve_vendor(request, id):
 
 
 @login_required(login_url="vendor_login")
-@vendor_required
+@admin_required
 def vendor_purchase_order_list(request):
 
     vendor = get_object_or_404(
@@ -983,7 +966,7 @@ def vendor_purchase_order_list(request):
         }
     )
 @login_required(login_url="vendor_login")
-@vendor_required
+@admin_required
 def vendor_invoice_list(request):
 
     vendor = get_object_or_404(
