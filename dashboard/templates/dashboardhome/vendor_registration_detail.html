@@ -1,0 +1,750 @@
+{% extends "dashboardhome/base.html" %}
+
+{% block title %}
+Vendor Registration Details
+{% endblock %}
+
+{% block content %}
+
+<table width="100%" cellpadding="0" cellspacing="0">
+
+    <tr>
+
+        <td>
+
+            <div style="
+                font-size:30px;
+                font-weight:bold;
+                color:#17336E;
+            ">
+                Vendor Registration Details
+            </div>
+
+            <div style="
+                font-size:14px;
+                color:#777;
+                margin-top:5px;
+            ">
+                Dashboard > Vendor Registration > Details
+            </div>
+
+        </td>
+
+        <td align="right">
+
+            <a href="{% url 'vendor_registration_list' %}"
+               style="
+               background:#6C757D;
+               color:white;
+               text-decoration:none;
+               padding:11px 20px;
+               border-radius:6px;
+               ">
+                ← Back
+            </a>
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br>
+
+
+<!-- ================= STATUS ================= -->
+
+<table width="100%"
+       cellpadding="20"
+       cellspacing="0"
+       style="
+       background:white;
+       border:1px solid #E5E5E5;
+       border-radius:10px;">
+
+    <tr>
+
+        <td>
+
+            <b style="color:#555;">
+                Registration Status
+            </b>
+
+            <br><br>
+
+            {% if registration.status == "Pending" %}
+
+                <span style="
+                    background:#FFF3CD;
+                    color:#856404;
+                    padding:7px 15px;
+                    border-radius:20px;
+                    font-weight:bold;
+                    font-size:13px;
+                ">
+                    Pending Review
+                </span>
+
+            {% elif registration.status == "Approved" %}
+
+                <span style="
+                    background:#D1E7DD;
+                    color:#0F5132;
+                    padding:7px 15px;
+                    border-radius:20px;
+                    font-weight:bold;
+                    font-size:13px;
+                ">
+                    Approved
+                </span>
+
+            {% else %}
+
+                <span style="
+                    background:#F8D7DA;
+                    color:#842029;
+                    padding:7px 15px;
+                    border-radius:20px;
+                    font-weight:bold;
+                    font-size:13px;
+                ">
+                    Rejected
+                </span>
+
+            {% endif %}
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br>
+
+
+<!-- ================= COMPANY INFORMATION ================= -->
+
+<table width="100%"
+       cellpadding="15"
+       cellspacing="0"
+       style="
+       background:white;
+       border:1px solid #E5E5E5;
+       border-radius:10px;">
+
+    <tr>
+
+        <td colspan="2">
+
+            <h2 style="
+                margin:0;
+                color:#17336E;
+            ">
+                Company Information
+            </h2>
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td width="50%">
+
+            <b>Company Name</b>
+
+            <br>
+
+            {{ registration.company_name }}
+
+        </td>
+
+        <td width="50%">
+
+            <b>Legal Entity Name</b>
+
+            <br>
+
+            {{ registration.legal_name }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Business Type</b>
+
+            <br>
+
+            {{ registration.business_type }}
+
+        </td>
+
+        <td>
+
+            <b>Registration Number</b>
+
+            <br>
+
+            {{ registration.registration_number }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>GST Number</b>
+
+            <br>
+
+            {{ registration.gst_number }}
+
+        </td>
+
+        <td>
+
+            <b>PAN Number</b>
+
+            <br>
+
+            {{ registration.pan_number }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Year of Establishment</b>
+
+            <br>
+
+            {{ registration.establishment_year }}
+
+        </td>
+
+        <td>
+
+            <b>Industry</b>
+
+            <br>
+
+            {{ registration.industry }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Annual Turnover</b>
+
+            <br>
+
+            ₹ {{ registration.annual_turnover }}
+
+        </td>
+
+        <td>
+
+            <b>Products / Services</b>
+
+            <br>
+
+            {{ registration.products_services }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Country</b>
+
+            <br>
+
+            {{ registration.country }}
+
+        </td>
+
+        <td>
+
+            <b>State</b>
+
+            <br>
+
+            {{ registration.state }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>City</b>
+
+            <br>
+
+            {{ registration.city }}
+
+        </td>
+
+        <td>
+
+            <b>Registered Address</b>
+
+            <br>
+
+            {{ registration.address }}
+
+        </td>
+
+    </tr>
+
+</table>
+
+<br>
+
+
+<!-- ================= CONTACT INFORMATION ================= -->
+
+<table width="100%"
+       cellpadding="15"
+       cellspacing="0"
+       style="
+       background:white;
+       border:1px solid #E5E5E5;
+       border-radius:10px;">
+
+    <tr>
+
+        <td colspan="2">
+
+            <h2 style="
+                margin:0;
+                color:#17336E;
+            ">
+                Contact Information
+            </h2>
+
+        </td>
+
+    </tr>
+
+
+    {% if contact %}
+
+    <tr>
+
+        <td width="50%">
+
+            <b>Primary Name</b>
+
+            <br>
+
+            {{ contact.primary_name }}
+
+        </td>
+
+        <td width="50%">
+
+            <b>Designation</b>
+
+            <br>
+
+            {{ contact.primary_designation }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Primary Email</b>
+
+            <br>
+
+            {{ contact.primary_email }}
+
+        </td>
+
+        <td>
+
+            <b>Primary Mobile</b>
+
+            <br>
+
+            {{ contact.primary_mobile }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Primary Phone</b>
+
+            <br>
+
+            {{ contact.primary_phone|default:"-" }}
+
+        </td>
+
+        <td>
+
+            <b>Secondary Name</b>
+
+            <br>
+
+            {{ contact.secondary_name|default:"-" }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Secondary Designation</b>
+
+            <br>
+
+            {{ contact.secondary_designation|default:"-" }}
+
+        </td>
+
+        <td>
+
+            <b>Secondary Email</b>
+
+            <br>
+
+            {{ contact.secondary_email|default:"-" }}
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Secondary Mobile</b>
+
+            <br>
+
+            {{ contact.secondary_mobile|default:"-" }}
+
+        </td>
+
+        <td>
+
+            <b>Secondary Phone</b>
+
+            <br>
+
+            {{ contact.secondary_phone|default:"-" }}
+
+        </td>
+
+    </tr>
+
+    {% else %}
+
+    <tr>
+
+        <td colspan="2"
+            style="color:#777;">
+
+            Contact information not available.
+
+        </td>
+
+    </tr>
+
+    {% endif %}
+
+</table>
+
+<br>
+
+
+<!-- ================= DOCUMENTS ================= -->
+
+<table width="100%"
+       cellpadding="15"
+       cellspacing="0"
+       style="
+       background:white;
+       border:1px solid #E5E5E5;
+       border-radius:10px;">
+
+    <tr>
+
+        <td colspan="2">
+
+            <h2 style="
+                margin:0;
+                color:#17336E;
+            ">
+                Documents
+            </h2>
+
+        </td>
+
+    </tr>
+
+
+    {% if documents %}
+
+    <tr>
+
+        <td width="50%">
+
+            <b>Registration Certificate</b>
+
+            <br><br>
+
+            <a href="{{ documents.registration_certificate.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Document
+            </a>
+
+        </td>
+
+
+        <td width="50%">
+
+            <b>GST Certificate</b>
+
+            <br><br>
+
+            <a href="{{ documents.gst_certificate.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Document
+            </a>
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>PAN Document</b>
+
+            <br><br>
+
+            <a href="{{ documents.pan_document.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Document
+            </a>
+
+        </td>
+
+
+        <td>
+
+            <b>Bank Document</b>
+
+            <br><br>
+
+            <a href="{{ documents.bank_document.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Document
+            </a>
+
+        </td>
+
+    </tr>
+
+
+    <tr>
+
+        <td>
+
+            <b>Company Logo</b>
+
+            <br><br>
+
+            {% if documents.company_logo %}
+
+            <a href="{{ documents.company_logo.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Logo
+            </a>
+
+            {% else %}
+
+            -
+
+            {% endif %}
+
+        </td>
+
+
+        <td>
+
+            <b>Other Document</b>
+
+            <br><br>
+
+            {% if documents.other_document %}
+
+            <a href="{{ documents.other_document.url }}"
+               target="_blank"
+               style="
+               background:#17336E;
+               color:white;
+               padding:8px 15px;
+               border-radius:5px;
+               text-decoration:none;
+               ">
+                View Document
+            </a>
+
+            {% else %}
+
+            -
+
+            {% endif %}
+
+        </td>
+
+    </tr>
+
+    {% else %}
+
+    <tr>
+
+        <td colspan="2"
+            style="color:#777;">
+
+            Documents not available.
+
+        </td>
+
+    </tr>
+
+    {% endif %}
+
+</table>
+
+<br>
+
+
+<!-- ================= APPROVE / REJECT ================= -->
+
+{% if registration.status == "Pending" %}
+
+<table width="100%" cellpadding="15" cellspacing="0">
+
+    <tr>
+
+        <td>
+
+            <a href="{% url 'reject_vendor' registration.id %}"
+               style="
+               background:#DC3545;
+               color:white;
+               text-decoration:none;
+               padding:12px 25px;
+               border-radius:6px;
+               font-weight:bold;
+               ">
+                Reject
+            </a>
+
+        </td>
+
+
+        <td align="right">
+
+            <a href="{% url 'approve_vendor' registration.id %}"
+               style="
+               background:#198754;
+               color:white;
+               text-decoration:none;
+               padding:12px 25px;
+               border-radius:6px;
+               font-weight:bold;
+               ">
+                Approve
+            </a>
+
+        </td>
+
+    </tr>
+
+</table>
+
+{% endif %}
+
+{% endblock %}

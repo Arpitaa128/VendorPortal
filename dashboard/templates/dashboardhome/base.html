@@ -90,84 +90,86 @@
         </td>
 
 
-        <td align="right"
-            style="padding-right:25px;">
+        {% if "vendor-registration" not in request.path %}
 
-            <table cellpadding="6"
-                   cellspacing="0">
+<td align="right"
+    style="padding-right:25px;">
 
-                <tr>
+<table cellpadding="6"
+       cellspacing="0">
 
-                    <td>
+<tr>
 
-                        <i class="fa-regular fa-bell"
-                           style="
-                           font-size:20px;
-                           color:#666;
-                           "></i>
+<td>
 
-                    </td>
+<i class="fa-regular fa-bell"
+style="
+font-size:20px;
+color:#666;
+"></i>
 
+</td>
 
-                    <td width="12"></td>
+<td width="12"></td>
 
+<td>
 
-                    <td>
+<div style="
+width:42px;
+height:42px;
+border-radius:50%;
+background:#17336E;
+color:white;
+font-weight:bold;
+line-height:42px;
+text-align:center;
+">
 
-                        <div style="
-                            width:42px;
-                            height:42px;
-                            border-radius:50%;
-                            background:#17336E;
-                            color:white;
-                            font-weight:bold;
-                            line-height:42px;
-                            text-align:center;
-                        ">
+{{ request.user.username|first|upper }}
 
-                            {{ request.user.username|first|upper }}
+</div>
 
-                        </div>
+</td>
 
-                    </td>
+<td>
 
+<div style="
+font-weight:bold;
+color:#17336E;
+">
 
-                    <td>
+{{ request.user.username }}
 
-                        <div style="
-                            font-weight:bold;
-                            color:#17336E;
-                        ">
+</div>
 
-                            {{ request.user.username }}
+<div style="
+font-size:12px;
+color:#777;
+">
 
-                        </div>
+{% if request.session.role == "admin" %}
 
+Administrator
 
-                        <div style="
-                            font-size:12px;
-                            color:#777;
-                        ">
+{% elif request.session.role == "vendor" %}
 
-                            {% if request.session.role == "admin" %}
+Vendor
 
-                                Administrator
+{% endif %}
 
-                            {% elif request.session.role == "vendor" %}
+</div>
 
-                                Vendor
+</td>
 
-                            {% endif %}
+</tr>
 
-                        </div>
+</table>
 
-                    </td>
+</td>
 
-                </tr>
+{% endif %}
 
-            </table>
-
-        </td>
+            
 
     </tr>
 
@@ -188,7 +190,7 @@
 
 
         <!-- ================= SIDEBAR ================= -->
-
+{% if "vendor-registration" not in request.path %}
         <td
             style="
             width:360px;
@@ -246,25 +248,25 @@
 
                         <!-- Vendor Registration -->
 
-                        <a href="{% url 'company_information' %}"
-                           class="sidebar-menu"
-                           style="
-                           display:block;
-                           margin:8px 12px;
-                           padding:15px 20px;
-                           color:#fff;
-                           text-decoration:none;
-                           border-radius:10px;
-                           font-size:16px;
-                           ">
+                        <a href="{% url 'vendor_registration_list' %}"
+class="sidebar-menu"
+style="
+display:block;
+margin:8px 12px;
+padding:15px 20px;
+color:#fff;
+text-decoration:none;
+border-radius:10px;
+font-size:16px;
+">
 
-                            <i class="fa-solid fa-user-plus"></i>
+    <i class="fa-solid fa-user-plus"></i>
 
-                            <span style="margin-left:14px;">
-                                Vendor Registration
-                            </span>
+    <span style="margin-left:14px;">
+        Vendor Registration
+    </span>
 
-                        </a>
+</a>
 
 
                         <!-- Vendor Management -->
@@ -464,58 +466,58 @@
                         {% endif %}
 
 
-                        <!-- ================================================= -->
-                        <!-- ================= COMMON MENU =================== -->
-                        <!-- ================================================= -->
+                       <!-- ================= COMMON MENU =================== -->
+
+{% if request.session.role == "admin" or request.session.role == "vendor" %}
+
+<!-- My Profile -->
+
+<a href="{% url 'profile' %}"
+class="sidebar-menu"
+style="
+display:block;
+margin:30px 12px 12px;
+padding:15px 20px;
+color:#FFB6B6;
+text-decoration:none;
+border-radius:10px;
+font-size:16px;
+font-weight:600;
+">
+
+<i class="fa-solid fa-user"></i>
+
+<span style="margin-left:14px;">
+My Profile
+</span>
+
+</a>
 
 
-                        <!-- My Profile -->
+<!-- Logout -->
 
-                        <a href="{% url 'profile' %}"
-                           class="sidebar-menu"
-                           style="
-                           display:block;
-                           margin:30px 12px 12px;
-                           padding:15px 20px;
-                           color:#FFB6B6;
-                           text-decoration:none;
-                           border-radius:10px;
-                           font-size:16px;
-                           font-weight:600;
-                           ">
+<a href="{% url 'logout' %}"
+class="sidebar-menu"
+style="
+display:block;
+margin:30px 12px 12px;
+padding:15px 20px;
+color:#FFB6B6;
+text-decoration:none;
+border-radius:10px;
+font-size:16px;
+font-weight:600;
+">
 
-                            <i class="fa-solid fa-user"></i>
+<i class="fa-solid fa-right-from-bracket"></i>
 
-                            <span style="margin-left:14px;">
-                                My Profile
-                            </span>
+<span style="margin-left:14px;">
+Logout
+</span>
 
-                        </a>
+</a>
 
-
-                        <!-- Logout -->
-
-                        <a href="{% url 'logout' %}"
-                           class="sidebar-menu"
-                           style="
-                           display:block;
-                           margin:30px 12px 12px;
-                           padding:15px 20px;
-                           color:#FFB6B6;
-                           text-decoration:none;
-                           border-radius:10px;
-                           font-size:16px;
-                           font-weight:600;
-                           ">
-
-                            <i class="fa-solid fa-right-from-bracket"></i>
-
-                            <span style="margin-left:14px;">
-                                Logout
-                            </span>
-
-                        </a>
-
+{% endif %}
 
                     </td>
 
@@ -524,7 +526,7 @@
             </table>
 
         </td>
-
+{% endif %}
 
         <!-- ================= PAGE CONTENT ================= -->
 

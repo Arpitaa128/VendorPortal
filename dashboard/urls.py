@@ -41,6 +41,11 @@ path("vendor-registration/success/", views.registration_success,name="registrati
 
 path("vendor-registration/approve/<int:id>/",views.approve_vendor,name="approve_vendor",),
 path(
+    "vendor-registration/reject/<int:id>/",
+    views.reject_vendor,
+    name="reject_vendor",
+),
+path(
     "vendor/purchase-orders/",
     views.vendor_purchase_order_list,
     name="vendor_purchase_order_list",
@@ -55,7 +60,32 @@ path(
     views.vendor_invoice_list,
     name="vendor_invoice_list"
 ),
+path(
+    "vendor-registration/",
+    views.vendor_registration_list,
+    name="vendor_registration_list"
+),
 
+path(
+    "vendor-registration/detail/<int:id>/",
+    views.vendor_registration_detail,
+    name="vendor_registration_detail"
+),
+
+path(
+    "admin-login/",
+    views.admin_login,
+    name="admin_login"
+),
+
+path(
+    "vendor-registration/delete/<int:id>/",
+    views.delete_vendor_registration,
+    name="delete_vendor_registration"
+),
+
+path("vendor/signup/", views.vendor_signup, name="vendor_signup"),
+path("dashboard/", views.dashboard_redirect, name="dashboard_redirect"),
 ]
 
 

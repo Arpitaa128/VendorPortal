@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Admin Login</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+</head>
+
+
+<body style="
+margin:0;
+padding:0;
+background:#F4F7FC;
+font-family:Arial,Helvetica,sans-serif;
+">
+
+
+<table width="100%"
+       height="100%"
+       cellpadding="0"
+       cellspacing="0"
+       style="height:100vh;">
+
+    <tr>
+
+        <td align="center"
+            valign="middle">
+
+
+            <table width="430"
+                   cellpadding="0"
+                   cellspacing="0"
+                   style="
+                   background:#FFFFFF;
+                   border-radius:12px;
+                   box-shadow:0 8px 25px rgba(0,0,0,.15);
+                   ">
+
+
+                <tr>
+
+                    <td style="
+                    padding:35px;
+                    ">
+
+
+                        <!-- ================= TITLE ================= -->
+
+                        <div style="
+                        text-align:center;
+                        font-size:28px;
+                        font-weight:bold;
+                        color:#17336E;
+                        ">
+
+                            Admin Login
+
+                        </div>
+
+
+                        <div style="
+                        text-align:center;
+                        color:#777;
+                        font-size:14px;
+                        margin-top:8px;
+                        ">
+
+                            Enterprise Vendor Management System
+
+                        </div>
+
+
+                        <br><br>
+
+
+                        <!-- ================= ERROR ================= -->
+
+                        {% if error %}
+
+                        <div style="
+                        background:#FDECEC;
+                        color:#C62828;
+                        padding:12px;
+                        border-radius:6px;
+                        margin-bottom:20px;
+                        ">
+
+                            {{ error }}
+
+                        </div>
+
+                        {% endif %}
+
+
+                        <!-- ================= FORM ================= -->
+
+                        <form method="POST">
+
+                            {% csrf_token %}
+
+
+                            <!-- Username -->
+
+                            <label style="
+                            font-size:14px;
+                            font-weight:bold;
+                            color:#333;
+                            ">
+
+                                Admin Username
+
+                            </label>
+
+                            <br><br>
+
+
+                            <div style="
+                            border:1px solid #CCCCCC;
+                            border-radius:6px;
+                            height:45px;
+                            ">
+
+                                <table width="100%"
+                                       height="45"
+                                       cellpadding="0"
+                                       cellspacing="0">
+
+                                    <tr>
+
+                                        <td width="45"
+                                            align="center">
+
+                                            <i class="fa-solid fa-user"
+                                               style="color:#888;">
+                                            </i>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            {{ form.username }}
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                            <br>
+
+
+                            <!-- Password -->
+
+                            <label style="
+                            font-size:14px;
+                            font-weight:bold;
+                            color:#333;
+                            ">
+
+                                Password
+
+                            </label>
+
+                            <br><br>
+
+
+                            <div style="
+                            border:1px solid #CCCCCC;
+                            border-radius:6px;
+                            height:45px;
+                            ">
+
+                                <table width="100%"
+                                       height="45"
+                                       cellpadding="0"
+                                       cellspacing="0">
+
+                                    <tr>
+
+                                        <td width="45"
+                                            align="center">
+
+                                            <i class="fa-solid fa-lock"
+                                               style="color:#888;">
+                                            </i>
+
+                                        </td>
+
+
+                                        <td>
+
+                                            {{ form.password }}
+
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+
+                            </div>
+
+
+                            <br><br>
+
+
+                            <!-- Login Button -->
+
+                            <button
+                                type="submit"
+                                style="
+                                width:100%;
+                                height:48px;
+                                background:#17336E;
+                                color:white;
+                                border:none;
+                                border-radius:25px;
+                                font-size:17px;
+                                font-weight:bold;
+                                cursor:pointer;
+                                ">
+
+                                Login to Admin Portal
+
+                            </button>
+
+
+                        </form>
+
+
+                        <br>
+
+
+                        <div style="
+                        text-align:center;
+                        font-size:13px;
+                        color:#777;
+                        ">
+
+                            Authorized administrators only.
+
+                        </div>
+
+
+                    </td>
+
+                </tr>
+
+            </table>
+
+
+        </td>
+
+    </tr>
+
+</table>
+
+
+</body>
+
+</html>

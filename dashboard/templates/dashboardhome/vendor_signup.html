@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vendor Registration</title>
+</head>
+
+<body style="
+    margin:0;
+    padding:0;
+    font-family:Arial, sans-serif;
+    background:#f3f4f8;
+">
+
+<div style="
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:30px;
+">
+
+    <div style="
+        width:500px;
+        background:white;
+        border-radius:15px;
+        padding:40px;
+        box-shadow:0 10px 30px rgba(0,0,0,0.12);
+    ">
+
+        <!-- Top Red Bar -->
+        <div style="
+            height:45px;
+            background:#b51f2b;
+            border-radius:15px 15px 0 0;
+            margin:-40px -40px 25px -40px;
+        ">
+        </div>
+
+        <!-- Heading -->
+        <h1 style="
+            text-align:center;
+            margin:0;
+            font-size:32px;
+            color:#1f2937;
+        ">
+            Vendor <span style="color:#b51f2b;">Registration</span>
+        </h1>
+
+        <p style="
+            text-align:center;
+            color:#666;
+            margin-bottom:30px;
+        ">
+            Create your account to register as a vendor.
+        </p>
+
+
+        <!-- Messages -->
+        {% if messages %}
+            {% for message in messages %}
+                <div style="
+                    background:#fde8e8;
+                    color:#b42318;
+                    padding:14px;
+                    border-radius:8px;
+                    margin-bottom:20px;
+                ">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+
+        <!-- Signup Form -->
+        <form method="POST">
+
+            {% csrf_token %}
+
+            <!-- First Name -->
+            <label style="
+                display:block;
+                font-weight:bold;
+                margin-bottom:8px;
+                color:#333;
+            ">
+                First Name
+            </label>
+
+            <input
+                type="text"
+                name="first_name"
+                required
+                placeholder="Enter First Name"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    padding:14px;
+                    border:1px solid #ccc;
+                    border-radius:8px;
+                    margin-bottom:20px;
+                    font-size:15px;
+                "
+            >
+
+
+            <!-- Last Name -->
+            <label style="
+                display:block;
+                font-weight:bold;
+                margin-bottom:8px;
+                color:#333;
+            ">
+                Last Name
+            </label>
+
+            <input
+                type="text"
+                name="last_name"
+                required
+                placeholder="Enter Last Name"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    padding:14px;
+                    border:1px solid #ccc;
+                    border-radius:8px;
+                    margin-bottom:20px;
+                    font-size:15px;
+                "
+            >
+
+
+            <!-- Email -->
+            <label style="
+                display:block;
+                font-weight:bold;
+                margin-bottom:8px;
+                color:#333;
+            ">
+                Email Address
+            </label>
+
+            <input
+                type="email"
+                name="email"
+                required
+                placeholder="Enter Email Address"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    padding:14px;
+                    border:1px solid #ccc;
+                    border-radius:8px;
+                    margin-bottom:20px;
+                    font-size:15px;
+                "
+            >
+
+
+            <!-- Password -->
+            <label style="
+                display:block;
+                font-weight:bold;
+                margin-bottom:8px;
+                color:#333;
+            ">
+                Password
+            </label>
+
+            <input
+                type="password"
+                name="password"
+                required
+                placeholder="Enter Password"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    padding:14px;
+                    border:1px solid #ccc;
+                    border-radius:8px;
+                    margin-bottom:20px;
+                    font-size:15px;
+                "
+            >
+
+
+            <!-- Confirm Password -->
+            <label style="
+                display:block;
+                font-weight:bold;
+                margin-bottom:8px;
+                color:#333;
+            ">
+                Confirm Password
+            </label>
+
+            <input
+                type="password"
+                name="confirm_password"
+                required
+                placeholder="Confirm Password"
+                style="
+                    width:100%;
+                    box-sizing:border-box;
+                    padding:14px;
+                    border:1px solid #ccc;
+                    border-radius:8px;
+                    margin-bottom:25px;
+                    font-size:15px;
+                "
+            >
+
+
+            <!-- Register Button -->
+            <button
+                type="submit"
+                style="
+                    width:100%;
+                    padding:15px;
+                    background:#cf2626;
+                    color:white;
+                    border:none;
+                    border-radius:30px;
+                    font-size:17px;
+                    font-weight:bold;
+                    cursor:pointer;
+                "
+            >
+                Register
+            </button>
+
+        </form>
+
+
+        <!-- Login Link -->
+        <p style="
+            text-align:center;
+            margin-top:25px;
+            color:#333;
+        ">
+            Already have an account?
+
+            <a
+                href="{% url 'login' %}"
+                style="
+                    color:#b51f2b;
+                    font-weight:bold;
+                    text-decoration:none;
+                "
+            >
+                Login Here
+            </a>
+        </p>
+
+    </div>
+
+</div>
+
+</body>
+</html>
